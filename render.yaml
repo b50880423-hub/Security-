@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: telegram-group-security-bot
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m security_bot
+    healthCheckPath: /health
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: MONGO_URL
+        sync: false
+      - key: MONGO_DB_NAME
+        value: telegram_security
+      - key: OWNER_ID
+        sync: false
+      - key: DEFAULT_MUTE_MINUTES
+        value: "60"
+      - key: ALERT_CHAT_ID
+        sync: false
